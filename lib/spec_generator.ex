@@ -5,7 +5,7 @@ defmodule SpecGenerator do
 
   defp generate({:error, _}, file_path), do: IO.puts("error file path")
   defp generate({:ok, source}, file_path) do
-    do_generate(source)
+    File.write!(file_path, do_generate(source))
   end
 
   defp do_generate(source) do
@@ -16,7 +16,8 @@ defmodule SpecGenerator do
                        |> Enum.reduce({[],list}, &insert_spec(&1, &2))
     generated = new_list |> Enum.join("\n")
     IO.puts generated
-    Code.eval_string(generated)
+    #Code.eval_string(generated)
+    generated
   end
 
   defp insert_spec({code = "  def" <> _, index}, {new_list, list}) do
@@ -44,7 +45,7 @@ defmodule SpecGenerator do
       ":" <> _ -> "  @spec #{method_name} :: any()"
       " do" <> _ -> "  @spec #{method_name} :: any()"
       args -> arguments = Regex.replace(~r/\W+\s/, arguments |> String.replace(":", ""), "()\\0")
-              arguments = Regex.replace(~r/\w+/, arguments, "any")
+              #arguments = Regex.replace(~r/\w+/, arguments, "any")
               "  @spec #{method_name}(" <> arguments <> ("()) :: any()")
     end
   end
