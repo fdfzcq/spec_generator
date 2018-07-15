@@ -1,4 +1,15 @@
 defmodule SpecGenerator do
+
+  alias SpecGenerator.Finder
+
+  def process([]), do: process(Finder.find_all("./"))
+  def process(args) do
+    args
+    |> Enum.map(&generate/1)
+  end
+
+  ### TODO: extract into separate files, use AST instead of parsing plain text file ####
+
   def generate(file_path) do
     generate(File.read(file_path), file_path)
   end
