@@ -1,4 +1,6 @@
 defmodule SpecGenerator.Parser do
+
+  # TODO check if @spec already exist to avoid duplicates
   def parse(file_path) do
     #{:ok, _} = GenServer.start_link(SpecGenerator.Generator, [], name: :generator)
     code_str = File.read!(file_path)
