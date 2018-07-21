@@ -8,7 +8,7 @@ defmodule SpecGenerator.Finder do
   end
 
   defp find_all_ex(relative_path) do
-    files = 'ls -d '
+    'ls -d '
       |> Kernel.++(String.to_charlist(relative_path))
       |> Kernel.++('**/*.ex')
       |> :os.cmd()

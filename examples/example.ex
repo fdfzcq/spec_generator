@@ -5,4 +5,8 @@ defmodule Example do
 end
 defmodule ExampleB do
   def func(t), do: :ok
+  defp function(_), do: "\n"
+  def test(n) do
+    n
+  end
 end
