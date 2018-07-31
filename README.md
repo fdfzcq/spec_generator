@@ -31,4 +31,4 @@ mix type_spec.generate "spec_generator.ex,test.ex"
 ```
 ## WIP: next step
 
-Parse AST and generate specs according to type specified.
+Generate spec based with the help of PBT(property based testing)?
